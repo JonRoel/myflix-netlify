@@ -1,0 +1,1 @@
+module.exports = require('./bundle-url').getBundleURL() + "myflix-logo.HASH_REF_d4828effd6c64fdb062bc59ac3ab4377.png";

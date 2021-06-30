@@ -1,0 +1,309 @@
+var helpers = require("../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "UpdateView", ()=>UpdateView
+);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactBootstrap = require("react-bootstrap");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _reactRouterDom = require("react-router-dom");
+var _updateViewScss = require("./update-view.scss");
+class UpdateView extends _reactDefault.default.Component {
+    constructor(){
+        super();
+        this.state = {
+            Username: "",
+            Password: "",
+            Email: "",
+            Birthday: "",
+            PasswordError: "",
+            EmailError: "",
+            BirthdayError: ""
+        };
+    }
+    componentDidMount() {
+        let accessToken = localStorage.getItem("token");
+        this.getUser(accessToken);
+    }
+    getUser(token) {
+        let url = 'https://myflix-jonathon.herokuapp.com/users/' + localStorage.getItem('user');
+        _axiosDefault.default.get(url, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            this.setState({
+                Username: response.data.Username,
+                Password: response.data.Password,
+                Email: response.data.Email,
+                Birthday: response.data.Birthday
+            });
+        });
+    }
+    /* Handle form update */ handleUpdate(e) {
+        let token = localStorage.getItem("token");
+        let user = localStorage.getItem("user");
+        let validated = this.formValidation();
+        if (validated) _axiosDefault.default.put(`https://myflix-jonathon.herokuapp.com/userupdate/${user}`, {
+            Password: this.state.Password,
+            Email: this.state.Email,
+            Birthday: this.state.Birthday
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            const data = response.data;
+            console.log(data);
+            alert(user + " has been updated.");
+            console.log(response);
+            window.open('{`/users/${this.props.user}`}', '_self');
+        }).catch(function(error) {
+            alert(error.response.data);
+        });
+    }
+    /* Form Validation Start */ formValidation() {
+        let EmailError = {
+        };
+        let PasswordError = {
+        };
+        let BirthdayError = {
+        };
+        let isValid = true;
+        if (this.state.Password.trim().length < 5 || this.state.Password === '') {
+            PasswordError.passwordMissing = "You must enter a password at least 6 characters long.";
+            isValid = false;
+        }
+        if (!(this.state.Email && this.state.Email.includes(".") && this.state.Email.includes("@"))) {
+            EmailError.emailNotEmail = "Your email doesn't look quite right.";
+            isValid = false;
+        }
+        if (this.state.Birthday === '' || !this.state.Birthday) {
+            BirthdayError.BirthdayEmpty = "Please enter your date of birth.";
+            isValid = false;
+        }
+        this.setState({
+            PasswordError: PasswordError,
+            EmailError: EmailError,
+            BirthdayError: BirthdayError
+        });
+        return isValid;
+    }
+    setField(e) {
+        let { name , value  } = e.target;
+        this.setState({
+            [name]: value
+        });
+    }
+    render() {
+        const { user  } = this.props;
+        const { PasswordError , EmailError , BirthdayError  } = this.state;
+        return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
+            className: "profile-wrapper text-light",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 111
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
+            className: "ml-1",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 112
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement("h4", {
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 113
+            },
+            __self: this
+        }, "Update info for: ", `${this.props.user}`), /*#__PURE__*/ _reactDefault.default.createElement("p", {
+            className: "note",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 114
+            },
+            __self: this
+        }, "Username cannot be updated")), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 116
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
+            controlId: "updateEmail",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 117
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 118
+            },
+            __self: this
+        }, "Email"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
+            type: "email",
+            name: "Email",
+            placeholder: `${this.state.Email}`,
+            onChange: (e)=>this.setField(e)
+            ,
+            required: true,
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 119
+            },
+            __self: this
+        }), Object.keys(EmailError).map((key)=>{
+            return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
+                className: "updateform-validation-error",
+                key: key,
+                __source: {
+                    fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                    lineNumber: 122
+                },
+                __self: this
+            }, EmailError[key]));
+        })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
+            controlId: "updateBirthday",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 128
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 129
+            },
+            __self: this
+        }, "Birthday"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
+            type: "date",
+            name: "Birthday",
+            onChange: (e)=>this.setField(e)
+            ,
+            required: true,
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 130
+            },
+            __self: this
+        }), Object.keys(BirthdayError).map((key)=>{
+            return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
+                className: "updateform-validation-error",
+                key: key,
+                __source: {
+                    fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                    lineNumber: 133
+                },
+                __self: this
+            }, BirthdayError[key]));
+        })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
+            controlId: "updatePassword",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 139
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 140
+            },
+            __self: this
+        }, "New Password"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
+            type: "password",
+            name: "Password",
+            placeholder: "",
+            onChange: (e)=>this.setField(e)
+            ,
+            required: true,
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 141
+            },
+            __self: this
+        }), Object.keys(PasswordError).map((key)=>{
+            return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
+                className: "updateform-validation-error",
+                key: key,
+                __source: {
+                    fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                    lineNumber: 144
+                },
+                __self: this
+            }, PasswordError[key]));
+        }))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 151
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+            className: "reg-btns mt-1",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 152
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
+            to: `/users/${this.props.user}`,
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 153
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+            variant: "link",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 153
+            },
+            __self: this
+        }, "Cancel"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+            className: "reg-btns mt-1",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 155
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+            size: "md",
+            variant: "primary",
+            type: "submit",
+            ml: "4",
+            onClick: ()=>this.handleUpdate()
+            ,
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/update-view/update-view.jsx",
+                lineNumber: 156
+            },
+            __self: this
+        }, "Submit")))));
+    }
+}
+UpdateView.propTypes = {
+    users: _propTypesDefault.default.shape({
+        Username: _propTypesDefault.default.string,
+        Email: _propTypesDefault.default.string.isRequired,
+        Password: _propTypesDefault.default.string.isRequired,
+        Birthday: _propTypesDefault.default.string
+    })
+};
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
