@@ -1,0 +1,157 @@
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "NavBar", ()=>NavBar
+);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRedux = require("react-redux");
+var _reactBootstrap = require("react-bootstrap");
+var _navbar = require("react-bootstrap/Navbar");
+var _navbarDefault = parcelHelpers.interopDefault(_navbar);
+var _nav = require("react-bootstrap/Nav");
+var _navDefault = parcelHelpers.interopDefault(_nav);
+var _myflixLogoPng = require("url:../../../public/myflix-logo.png");
+var _myflixLogoPngDefault = parcelHelpers.interopDefault(_myflixLogoPng);
+var _container = require("react-bootstrap/Container");
+var _containerDefault = parcelHelpers.interopDefault(_container);
+var _button = require("react-bootstrap/Button");
+var _buttonDefault = parcelHelpers.interopDefault(_button);
+var _reactRouterDom = require("react-router-dom");
+var _navbarViewScss = require("./navbar-view.scss");
+class NavBar extends _reactDefault.default.Component {
+    // Log out function
+    onLoggedOut() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/';
+        this.setState({
+            user: null,
+            token: null
+        });
+    }
+    render() {
+        const { users  } = this.props;
+        return(/*#__PURE__*/ _reactDefault.default.createElement(_navbarDefault.default, {
+            className: "navigation-main",
+            collapseOnSelect: true,
+            expand: "lg",
+            bg: "dark",
+            variant: "dark",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/navbar-view/navbar-view.jsx",
+                lineNumber: 33
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_containerDefault.default, {
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/navbar-view/navbar-view.jsx",
+                lineNumber: 34
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_navbarDefault.default.Brand, {
+            href: "/",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/navbar-view/navbar-view.jsx",
+                lineNumber: 35
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement("img", {
+            className: "myFlix-logo-nav",
+            width: 100,
+            src: _myflixLogoPngDefault.default,
+            alt: "myFlix Logo",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/navbar-view/navbar-view.jsx",
+                lineNumber: 35
+            },
+            __self: this
+        })), /*#__PURE__*/ _reactDefault.default.createElement(_navbarDefault.default.Toggle, {
+            "aria-controls": "responsive-navbar-nav",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/navbar-view/navbar-view.jsx",
+                lineNumber: 36
+            },
+            __self: this
+        }), /*#__PURE__*/ _reactDefault.default.createElement(_navbarDefault.default.Collapse, {
+            id: "responsive-navbar-nav",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/navbar-view/navbar-view.jsx",
+                lineNumber: 37
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_navDefault.default, {
+            className: "menu-items",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/navbar-view/navbar-view.jsx",
+                lineNumber: 38
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_navDefault.default.Link, {
+            href: "",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/navbar-view/navbar-view.jsx",
+                lineNumber: 39
+            },
+            __self: this
+        }, "Hi ", `${this.props.user}`, " "), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown, {
+            title: "",
+            id: "collasible-nav-dropdown",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/navbar-view/navbar-view.jsx",
+                lineNumber: 40
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Item, {
+            as: _reactRouterDom.Link,
+            to: "/",
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/navbar-view/navbar-view.jsx",
+                lineNumber: 41
+            },
+            __self: this
+        }, "Movies"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Item, {
+            as: _reactRouterDom.Link,
+            to: `/users/${this.props.user}`,
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/navbar-view/navbar-view.jsx",
+                lineNumber: 42
+            },
+            __self: this
+        }, "Account Details"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Divider, {
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/navbar-view/navbar-view.jsx",
+                lineNumber: 43
+            },
+            __self: this
+        }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Item, {
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/navbar-view/navbar-view.jsx",
+                lineNumber: 44
+            },
+            __self: this
+        }), /*#__PURE__*/ _reactDefault.default.createElement(_buttonDefault.default, {
+            className: "logout-button",
+            variant: "link",
+            onClick: ()=>{
+                this.onLoggedOut();
+            },
+            __source: {
+                fileName: "/Users/jonathonroeland/Documents/School Work/myflix-netlify/src/components/navbar-view/navbar-view.jsx",
+                lineNumber: 45
+            },
+            __self: this
+        }, "Logout")))))));
+    }
+}
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
